@@ -1,0 +1,15 @@
+public static void main(String[] args) throws Exception {
+		Integer mapEntry =  IntStream.of(2,2,5,5,5,6,7,8,1,3,3,3,0,3,5,5)
+													   .boxed()
+													   .collect(Collectors.groupingBy(Integer::intValue, Collectors.toList()))
+													   .entrySet()
+													   .stream()
+													   .collect(Collectors.toMap(
+				Map.Entry::getKey,
+				entry -> entry.getValue().size()))
+				 .entrySet()
+													   .stream()
+													   .max(Map.Entry.comparingByValue()).orElseThrow(() -> new Exception("not found"))
+									.getKey();
+		System.out.println(mapEntry.toString());
+	}
